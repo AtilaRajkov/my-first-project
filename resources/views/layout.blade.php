@@ -12,7 +12,7 @@
 
 <div class="container">
 
-    @include('internals.nav')
+    @include('nav')
 
     @yield('content')
 </div>
