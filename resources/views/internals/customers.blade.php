@@ -50,11 +50,15 @@
                 @endif
 
                 <div class="form-group">
-                    <label for="active">Company:</label>
-                    <select name="active" id="active" class="form-control">
-                        <option value="" disabled>Select customer status</option>
-                        <option value="1">Active</option>
-                        <option value="0">Inactive</option>
+                    <label for="company_id">Company:</label>
+                    <select name="company_id" id="company_id" class="form-control">
+                        <option value="" disabled>Select your company</option>
+
+                        @if(count($companies) > 0)
+                            @foreach($companies as $company)
+                                <option value="{{$company->id}}">{{$company->name}}</option>
+                            @endforeach
+                        @endif
                     </select>
                 </div>
                 @if($errors->has('active'))
@@ -77,7 +81,7 @@
             <h4>Active customers:</h4>
             <ul>
                 @foreach($activeCustomers as $customer)
-                    <li>{{$customer->name}} <span class="text-muted">({{$customer->email}})</span></li>
+                    <li>{{$customer->name}} <span class="text-muted">({{$customer->company->name}})</span></li>
                 @endforeach
             </ul>
         </div>
@@ -85,9 +89,26 @@
             <h4>Inactive customers:</h4>
             <ul>
                 @foreach($inactiveCustomers as $customer)
-                    <li>{{$customer->name}} <span class="text-muted">({{$customer->email}})</span></li>
+                    <li>{{$customer->name}} <span class="text-muted">({{$customer->company->name}})</span></li>
                 @endforeach
             </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            @foreach($companies as $company)
+                <h3>{{ $company->name }}</h3>
+
+                @if(count($company->customers) > 0)
+                    <ul>
+                    @foreach($company->customers as $customer)
+                        <li>{{ $customer->name }}</li>
+                    @endforeach
+                    </ul>
+                @endif
+
+            @endforeach
         </div>
     </div>
 
