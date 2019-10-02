@@ -9,6 +9,10 @@ use App\Company;
 class CustomersController extends Controller
 {
 
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
     public function index() {
 
         $activeCustomers = Customer::active()->get();
