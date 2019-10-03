@@ -14,9 +14,10 @@
                         </div>
                     @endif
 
-                    <div class="new-class">
-                        You are logged in!
-                    </div>
+{{--                    <div class="new-class-ati">--}}
+{{--                        You are logged in!--}}
+{{--                    </div>--}}
+                    <my-button text="" type="submit"></my-button>
 
                 </div>
             </div>
