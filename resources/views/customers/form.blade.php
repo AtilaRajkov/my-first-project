@@ -55,3 +55,13 @@
 @endif
 
 @csrf
+
+<div class="form-group">
+    <label for="image">Profile Image</label>
+    <input type="file" name="image" class="form-control-file py-3">
+    @if($errors->has('image'))
+        <div class="alert alert-danger">
+            {{$errors->first('image')}}
+        </div>
+    @endif
+</div>

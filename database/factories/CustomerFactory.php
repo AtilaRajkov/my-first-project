@@ -5,13 +5,12 @@
 use App\Model;
 use Faker\Generator as Faker;
 use App\Customer;
-use App\Company;
 
 $factory->define(Customer::class, function (Faker $faker) {
     return [
-        'company_id' => factory(Company::class)->create(),
+        'company_id' => factory(\App\Company::class)->create(),
         'name' => $faker->name,
         'email' =>  $faker->unique()->safeEmail,
-        'active' => 1
+        'active' => 1,
     ];
 });
