@@ -12,5 +12,6 @@ $factory->define(Customer::class, function (Faker $faker) {
         'name' => $faker->name,
         'email' =>  $faker->unique()->safeEmail,
         'active' => 1,
+        'image' => $faker->image('storage/app/public/uploads',300,300, null, false),
     ];
 });

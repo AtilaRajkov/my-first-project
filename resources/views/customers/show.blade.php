@@ -27,9 +27,14 @@
     </div>
 
     @if($customer->image)
-        <div class="row">
-            <div class="col-12"><img src="{{ asset('storage/' . $customer->image) }}" alt="" class="img-thumbnail" width="200"></div>
-        </div>
+        @if(strpos($customer->image, 'uploads') !== false)
+            <div class="row">
+                <div class="col-12"><img src="{{ asset('storage/' . $customer->image) }}" alt="" class="img-thumbnail" width="300"></div>
+            </div>
+        @else
+            <div class="row">
+                <div class="col-12"><img src="{{ asset('storage/uploads/' . $customer->image) }}" alt="" class="img-thumbnail" width="300"></div>
+            </div>
+        @endif
     @endif
-
 @endsection

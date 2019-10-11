@@ -24,7 +24,7 @@
                     <a class="nav-link" href="{{route('contact.create')}}">Contact Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link "href="{{route('customers.index')}}">Costumer List</a>
+                    <a class="nav-link "href="{{route('customers.index')}}">Customer List</a>
                 </li>
             </ul>
 

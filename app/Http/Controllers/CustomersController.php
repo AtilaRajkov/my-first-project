@@ -19,9 +19,10 @@ class CustomersController extends Controller
 
     public function index() {
 
-        $activeCustomers = Customer::active()->get();
-        $inactiveCustomers = Customer::where('active', 0)->get();
-        $customers = Customer::all();
+//        $activeCustomers = Customer::active()->get();
+//        $inactiveCustomers = Customer::where('active', 0)->get();
+        $customers = Customer::with('company')->paginate(15);
+//        dd($customers->toArray());
 
         return view('customers.index', compact(['customers']));
 
@@ -38,6 +39,7 @@ class CustomersController extends Controller
 
     public function store()
     {
+        $this->authorize('create', Customer::class );
 
         $customer = Customer::create($this->validateRequest());
 
@@ -52,6 +54,9 @@ class CustomersController extends Controller
     public function show(Customer $customer) {
 //        $customer = Customer::where('id', $customer)->firstOrFail();
 //        $customer = Customer::firstOrFail($customer);
+
+//        dd($customer->image);
+
         return view('customers.show', compact('customer'));
     }
 
@@ -74,7 +79,9 @@ class CustomersController extends Controller
     }
 
 
-    public function destroy(Customer $customer) {
+    public function destroy(Customer $customer)
+    {
+        $this->authorize('delete', $customer);
 
         $customer->delete();
 
@@ -89,7 +96,7 @@ class CustomersController extends Controller
             'email' => 'required|email',
             'active' => 'required',
             'company_id' => 'required',
-            'image' => 'sometimes|file|image|max:102400',
+            'image' => 'sometimes|file|image|max:5120',
         ]);
 
     }
@@ -99,10 +106,10 @@ class CustomersController extends Controller
             $customer->update([
                 'image' => request()->image->store('uploads', 'public'),
             ]);
-        }
 
-        $image = Image::make(public_path('storage/' . $customer->image))->fit(300, 300);
-        $image->save();
+            $image = Image::make(public_path('storage/' . $customer->image))->fit(300, 300);
+            $image->save();
+        }
     }
 
 }
