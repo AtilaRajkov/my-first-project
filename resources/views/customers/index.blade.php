@@ -26,7 +26,26 @@
             <div class="col-2">
                 {{ $customer->id }}
             </div>
-            <div class="col-4"><a href="/customers/{{$customer->id}}">{{ $customer->name }}</a></div>
+{{--            @can('create', App\Customer::class)--}}
+{{--                <div class="col-4"><a href="/customers/{{$customer->id}}">{{ $customer->name }}</a></div>--}}
+{{--            @else--}}
+{{--                <div class="col-4">{{ $customer->name }}</div>--}}
+{{--            @endcan--}}
+
+            <div class="col-4">
+            @can('view', $customer)
+                <a href="/customers/{{$customer->id}}">
+                    {{ $customer->name }}
+                </a>
+            @endcan
+
+            @cannot('view', $customer)
+                    {{ $customer->name }}
+            @endcannot
+
+
+            </div>
+
             <div class="col-4">{{ $customer->company->name }}</div>
             <div class="col-2">{{ $customer->active }}</div>
         </div>

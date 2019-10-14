@@ -71,6 +71,8 @@ class CustomersController extends Controller
 
     public function update(Customer $customer) {
 
+//        $this->authorize('update', $customer);
+
         $customer->update($this->validateRequest());
 
         $this->storeImage($customer);

@@ -57,7 +57,9 @@ class CustomerPolicy
      */
     public function update(User $user, Customer $customer)
     {
-        //
+//        return in_array($user->email, [
+//            'admin@admin.com',
+//        ]);
     }
 
     /**
